@@ -20,14 +20,15 @@ const link = css`
 
 export interface ITweetQuoteProps {
   encodedTweetText: string;
+  id: string;
 }
 
-const TweetQuote: React.SFC<ITweetQuoteProps> = ({ encodedTweetText }) => {
+const TweetQuote: React.SFC<ITweetQuoteProps> = ({ encodedTweetText, id }) => {
   return (
     <a
       className={link}
       href={`https://twitter.com/intent/tweet?text=${encodedTweetText}`}
-      id="tweet-quote"
+      id={id}
     >
       <FontAwesomeIcon icon={faTwitter} /> Tweet Quote
     </a>

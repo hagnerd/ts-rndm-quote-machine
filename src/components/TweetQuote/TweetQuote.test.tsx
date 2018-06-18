@@ -5,6 +5,7 @@ import { ITweetQuoteProps } from './TweetQuote';
 
 const createProps = (props?: any): ITweetQuoteProps => ({
   encodedTweetText: encodeURIComponent('hey this is a tweet'),
+  id: '',
   ...props,
 });
 
@@ -16,16 +17,29 @@ describe('TweetQuote', () => {
     expect(tweetQuoteComp).toBeTruthy();
   });
 
-  test('should render an element with the id "tweet-quote" ', () => {
-    const props = createProps();
-    const { container, getByText } = render(<TweetQuote {...props} />);
-    const tweetQuoteId = container.querySelectorAll('#tweet-quote');
-    const tweetBtn = getByText(/tweet quote/i);
+  test('should render an element with the proper id', () => {
+    const props = createProps({ id: 'tweet-quote' });
+    const { container } = render(<TweetQuote {...props} />);
+    const tweetQuoteId = container.querySelectorAll(`#${props.id}`);
 
     expect(tweetQuoteId.length).toEqual(1);
+  });
+  test('should render with the proper text', () => {
+    const props = createProps();
+    const { getByText } = render(<TweetQuote {...props} />);
+    const tweetBtn = getByText(/tweet quote/i);
+
     expect(tweetBtn.innerHTML).toMatch(/tweet quote/i);
-    expect(tweetQuoteId[0].getAttribute('href')).toEqual(
-      `https://twitter.com/intent/tweet?=${props.encodedTweetText}`
+  });
+  test('should render with the proper url', () => {
+    const props = createProps({
+      encodedTweetText: encodeURIComponent('hi there'),
+    });
+    const { getByText } = render(<TweetQuote {...props} />);
+    const tweetBtn = getByText(/tweet quote/i);
+
+    expect(tweetBtn.getAttribute('href')).toEqual(
+      `https://twitter.com/intent/tweet?text=${props.encodedTweetText}`
     );
   });
 });
