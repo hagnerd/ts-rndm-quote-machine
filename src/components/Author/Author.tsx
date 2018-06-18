@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface IAuthorProps {
   author: string;
-  id: string;
+  id?: string;
 }
 
 const Author: React.SFC<IAuthorProps> = ({ author, id }) => {
