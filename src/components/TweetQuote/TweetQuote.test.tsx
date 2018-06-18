@@ -4,7 +4,6 @@ import TweetQuote from './TweetQuote';
 import { ITweetQuoteProps } from './TweetQuote';
 
 const createProps = (props?: any): ITweetQuoteProps => ({
-  baseUrl: 'https://twitter.com/intent/tweet/text?=',
   encodedTweetText: encodeURIComponent('hey this is a tweet'),
   ...props,
 });
@@ -26,7 +25,7 @@ describe('TweetQuote', () => {
     expect(tweetQuoteId.length).toEqual(1);
     expect(tweetBtn.innerHTML).toMatch(/tweet quote/i);
     expect(tweetQuoteId[0].getAttribute('href')).toEqual(
-      `${props.baseUrl}${props.encodedTweetText}`
+      `https://twitter.com/intent/tweet?=${props.encodedTweetText}`
     );
   });
 });

@@ -1,19 +1,35 @@
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { css } from 'emotion';
 import * as React from 'react';
 
+const link = css`
+  background-color: #3094ca;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: all 300ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 20px 10px -10px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 export interface ITweetQuoteProps {
-  baseUrl: string;
   encodedTweetText: string;
 }
 
-const TweetQuote: React.SFC<ITweetQuoteProps> = ({
-  baseUrl,
-  encodedTweetText,
-}) => {
+const TweetQuote: React.SFC<ITweetQuoteProps> = ({ encodedTweetText }) => {
   return (
-    <a href={`${baseUrl}${encodedTweetText}`} id="tweet-quote">
-      <FontAwesomeIcon icon={faTwitter} /> Tweet Quotes
+    <a
+      className={link}
+      href={`https://twitter.com/intent/tweet?text=${encodedTweetText}`}
+      id="tweet-quote"
+    >
+      <FontAwesomeIcon icon={faTwitter} /> Tweet Quote
     </a>
   );
 };
