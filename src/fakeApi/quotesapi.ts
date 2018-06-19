@@ -1,4 +1,4 @@
-export default [
+const quotes = [
   {
     author: 'Ellen Ullman',
     id: 0,
@@ -65,3 +65,5 @@ export default [
       'If you’re willing to restrict the flexibility of your approach, you can almost always do something better.',
   },
 ];
+
+export default quotes;

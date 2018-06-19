@@ -38,8 +38,9 @@ export default class Quote extends React.Component<QuoteProps, QuoteState> {
         : null;
   }
 
-  private handleClick = () =>
+  private handleClick = () => {
     this.setState({
       currentQuote: quotesApi[randomNumber(quotesApi.length)],
     });
+  };
 }

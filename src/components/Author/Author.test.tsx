@@ -20,7 +20,7 @@ describe('Author', () => {
     const { getByText } = render(<Author {...props} />);
     const authorNode = getByText(props.author);
 
-    expect(authorNode.innerHTML).toMatch(/stephen king/i);
+    expect(authorNode.innerHTML).toMatch(props.author);
   });
   test('should render with the correct id', () => {
     const props = createProps({ id: 'author' });
