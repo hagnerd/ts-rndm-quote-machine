@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { render, Simulate } from 'react-testing-library';
+import { fireEvent, render } from 'react-testing-library';
+import 'react-testing-library/cleanup-after-each';
 import NewQuoteBtn from './NewQuoteBtn';
 import { INewQuoteBtnProps } from './NewQuoteBtn';
 
@@ -30,12 +31,12 @@ describe('NewQuoteBtn', () => {
     expect(newQuoteBtn.innerHTML).toMatch(/get new quote/i);
   });
   test('should be able to click button', () => {
-    const props = createProps();
-    const { getByText } = render(<NewQuoteBtn {...props} />);
+    const spy = jest.fn();
+    const { getByText } = render(<NewQuoteBtn onClick={spy} id={''} />);
     const newQuoteBtn = getByText(/get new quote/i);
 
-    Simulate.click(newQuoteBtn);
+    fireEvent.click(newQuoteBtn);
 
-    expect(props.onClick).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
